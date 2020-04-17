@@ -17,7 +17,18 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: "BTTF";
+  src: url("/BTTF.ttf");
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/Roboto-Light.ttf");
+}
+
 body {
+  font-family: Roboto, Open Sans, sans-serif;
   background-color: black;
   color: white;
 }

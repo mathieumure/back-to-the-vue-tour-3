@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="time-travelled">
     <h1>Welcome to the {{currentDate}}</h1>
     <ul>
       <li v-for="(fact, factId) in parsedFacts" :key="factId">
@@ -15,7 +15,7 @@ import moment from 'moment';
 
 export default {
   name: "TimeTravelled",
-  data: () => ({facts: [], date: '1989-04-25'}),
+  data: () => ({facts: [], date: '2010-03-14'}),
   async mounted() {
     this.facts = await getContent(this.moment);
   },
@@ -34,5 +34,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .time-travelled {
+    margin: 40px;
+  }
 </style>

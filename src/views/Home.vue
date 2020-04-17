@@ -32,11 +32,6 @@ export default {
 </script>
 
 <style scoped="true">
-  @font-face {
-    font-family: "BTTF";
-    src: url("/BTTF.ttf");
-  }
-
   @keyframes slideFromRight {
     from {
       transform: rotateX(3deg) rotateY(16deg) rotateZ(-7deg) translateX(120vw);
