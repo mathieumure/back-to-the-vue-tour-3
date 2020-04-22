@@ -6,7 +6,7 @@
                     YEAR
                 </div>
                 <div class="digits-group__value">
-                    <NumberDigit :number="2020"/>
+                    <NumberDigit :number="year"/>
                 </div>
             </div>
             <div class="destination-time__digits-group">
@@ -14,7 +14,7 @@
                     DAY
                 </div>
                 <div class="digits-group__value">
-                    <NumberDigit :number="25"/>
+                    <NumberDigit :number="day"/>
                 </div>
             </div>
             <div class="destination-time__digits-group">
@@ -22,7 +22,7 @@
                     HOUR
                 </div>
                 <div class="digits-group__value">
-                    <NumberDigit :number="15"/>
+                    <NumberDigit :number="hour"/>
                 </div>
             </div>
             <div class="destination-time__digits-group">
@@ -30,22 +30,44 @@
                     MIN
                 </div>
                 <div class="digits-group__value">
-                    <NumberDigit :number="45"/>
+                    <NumberDigit :number="minutes"/>
                 </div>
             </div>
         </div>
         <div class="destination-time__title">
-            DESTINATION Time
+            DESTINATION TIME
         </div>
+        <DestinationTimeModalForm/>
     </div>
 </template>
 
 <script>
   import NumberDigit from './NumberDigit';
+  import moment from 'moment';
+  import DestinationTimeModalForm from './DestinationTimeModalForm';
 
   export default {
     name: "destination-time",
-    components: {NumberDigit}
+    components: {DestinationTimeModalForm, NumberDigit},
+    data() {
+      return {
+        destinationTime: new moment(Date.now())
+      }
+    },
+    computed: {
+      year() {
+        return this.destinationTime.year()
+      },
+      day() {
+        return this.destinationTime.days()
+      },
+      hour() {
+        return this.destinationTime.hour()
+      },
+      minutes() {
+        return this.destinationTime.minutes()
+      }
+    }
   }
 </script>
 
