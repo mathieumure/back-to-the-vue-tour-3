@@ -1,8 +1,8 @@
 <template>
-    <div class="number-digits">
-        <Digit
+    <div class="word-digit">
+        <AlphaDigit
             v-for="(digit, index) in digits"
-            class="single-digit"
+            class="single-ampha"
             :key="index"
             :value="digit"
         />
@@ -10,30 +10,30 @@
 </template>
 
 <script>
-  import Digit from './Digit';
+  import AlphaDigit from './AlphaDigit';
 
   export default {
-    name: "number-digit",
-    components: {Digit},
+    name: "word-digit",
+    components: {AlphaDigit},
     props: {
-      number: {
-        type: Number,
+      word: {
+        type: String,
         required: true
       }
     },
     computed: {
       digits() {
-        return this.number.toString().padStart(2, "0").split('').map(Number)
+        return this.word.split('')
       }
     }
   }
 </script>
 
 <style scoped>
-.number-digits {
+.word-digit {
     padding: 10px 15px;
 }
-.single-digit {
+.word-digit {
     margin-right: 10px;
 }
 </style>

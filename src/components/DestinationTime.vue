@@ -11,6 +11,14 @@
             </div>
             <div class="destination-time__digits-group">
                 <div class="digits-group__title">
+                    MONTH
+                </div>
+                <div class="digits-group__value">
+                    <WordDigit :word="month"/>
+                </div>
+            </div>
+            <div class="destination-time__digits-group">
+                <div class="digits-group__title">
                     DAY
                 </div>
                 <div class="digits-group__value">
@@ -37,18 +45,17 @@
         <div class="destination-time__title">
             DESTINATION TIME
         </div>
-        <DestinationTimeModalForm/>
     </div>
 </template>
 
 <script>
   import NumberDigit from './NumberDigit';
   import moment from 'moment';
-  import DestinationTimeModalForm from './DestinationTimeModalForm';
+  import WordDigit from './WordDigit';
 
   export default {
     name: "destination-time",
-    components: {DestinationTimeModalForm, NumberDigit},
+    components: {WordDigit, NumberDigit},
     data() {
       return {
         destinationTime: new moment(Date.now())
@@ -60,6 +67,9 @@
       },
       day() {
         return this.destinationTime.days()
+      },
+      month() {
+        return this.destinationTime.format('MMM');
       },
       hour() {
         return this.destinationTime.hour()
