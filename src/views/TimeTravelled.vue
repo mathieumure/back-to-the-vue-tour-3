@@ -12,10 +12,10 @@
 <script>
 import {getContent} from "../service";
 import moment from 'moment';
-
+// TODO: base on Vuex logic
 export default {
   name: "TimeTravelled",
-  data: () => ({facts: [], date: '2010-03-14'}),
+  data: () => ({facts: [], date: '1994-06-02'}),
   async mounted() {
     this.facts = await getContent(this.moment);
   },

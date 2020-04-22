@@ -52,15 +52,14 @@
   import NumberDigit from './NumberDigit';
   import moment from 'moment';
   import WordDigit from './WordDigit';
+// TODO : watch and emit datetime and add modal form
 
   export default {
     name: "destination-time",
     components: {WordDigit, NumberDigit},
-    data() {
-      return {
-        destinationTime: new moment(Date.now())
-      }
-    },
+    data: () => ({
+      destinationTime: moment()
+    }),
     computed: {
       year() {
         return this.destinationTime.year()

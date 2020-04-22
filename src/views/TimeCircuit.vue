@@ -10,7 +10,10 @@
 
 <script>
 import DestinationTime from '../components/DestinationTime';
-
+// TODO: handle destinationTime
+// TODO: add PresentTime: Date actuelle and sync with actual date (setTimeout)
+// TODO: add DestinationTime
+// TODO: handle vuex
 export default {
   name: 'TimeCircuit',
   components: {DestinationTime},

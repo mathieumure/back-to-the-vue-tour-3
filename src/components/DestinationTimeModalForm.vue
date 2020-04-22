@@ -10,7 +10,7 @@
     // TODO: use better modal dependency
   export default {
     name: "destination-time-modal-form",
-    
+
   }
 </script>
 
