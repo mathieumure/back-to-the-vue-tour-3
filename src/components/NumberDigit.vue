@@ -23,6 +23,9 @@
     },
     computed: {
       digits() {
+        if(this.number < 10) {
+          return [0, Number(this.number)]
+        }
         return this.number.toString().split('').map(Number)
       }
     }
