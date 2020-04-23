@@ -1,5 +1,6 @@
 <template>
     <div class="destination-time">
+      <DestinationTimeModalForm :date.sync="destinationTime" v-if="isModalDisplayed" @submit="closeModal" />
         <div class="destination-time__digits-groups">
             <div class="destination-time__digits-group">
                 <div class="digits-group__title">
@@ -42,9 +43,9 @@
                 </div>
             </div>
         </div>
-        <div class="destination-time__title">
+        <button type="button" class="destination-time__title" @click="openModal">
             DESTINATION TIME
-        </div>
+        </button>
     </div>
 </template>
 
@@ -52,13 +53,15 @@
   import NumberDigit from './NumberDigit';
   import moment from 'moment';
   import WordDigit from './WordDigit';
+  import DestinationTimeModalForm from "./DestinationTimeModalForm";
 // TODO : watch and emit datetime and add modal form
 
   export default {
     name: "destination-time",
-    components: {WordDigit, NumberDigit},
+    components: {DestinationTimeModalForm, WordDigit, NumberDigit},
     data: () => ({
-      destinationTime: moment()
+      destinationTime: moment(),
+      isModalDisplayed: false,
     }),
     computed: {
       year() {
@@ -76,6 +79,14 @@
       minutes() {
         return this.destinationTime.minutes()
       }
+    },
+    methods: {
+      openModal () {
+        this.isModalDisplayed = true
+      },
+      closeModal() {
+        this.isModalDisplayed = false
+      },
     }
   }
 </script>
@@ -123,5 +134,10 @@
         background-color: black;
         padding: 5px 16px;
         letter-spacing: 3px;
+        color: white;
+        border: none;
+    }
+    .destination-time__title:hover {
+      cursor: pointer;
     }
 </style>
