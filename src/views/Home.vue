@@ -1,7 +1,7 @@
 <template>
   <main class="main" @click="goToNextPage">
     <h1 class="title">Back</h1>
-    <h2 class="subtitle">&vue (ture)</h2>
+    <h2 class="subtitle">&vue tour</h2>
     <h3 class="version">{{ parseVue(vueVersion) }}</h3>
   </main>
 </template>
@@ -47,7 +47,7 @@ export default {
       translateY(-30px);
   }
   to {
-    transform: rotateX(3deg) rotateY(16deg) rotateZ(-7deg) translateX(200px)
+    transform: rotateX(3deg) rotateY(16deg) rotateZ(-7deg) translateX(140px)
       translateY(-30px);
   }
 }
