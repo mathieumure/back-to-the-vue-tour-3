@@ -49,7 +49,6 @@
 </template>
 
 <script>
-import moment from "moment";
 import NumberDigit from "./digits/NumberDigit";
 import WordDigit from "./digits/WordDigit";
 
@@ -57,15 +56,17 @@ export default {
   name: "last-departed-time",
   components: { WordDigit, NumberDigit },
   data: () => ({
-    digitColor: "#f5df18",
-    lastDepartedTime: moment()
+    digitColor: "#f5df18"
   }),
   computed: {
+    lastDepartedTime() {
+      return this.$store.getters.LAST_TIME_DEPARTED;
+    },
     year() {
       return this.lastDepartedTime.year();
     },
     day() {
-      return this.lastDepartedTime.days();
+      return this.lastDepartedTime.date();
     },
     month() {
       return this.lastDepartedTime.format("MMM");
@@ -89,7 +90,6 @@ export default {
   background-color: gray;
   padding: 5px 50px 0 50px;
   height: 230px;
-  width: 100%;
 }
 .last-departed-time__digits-groups {
   display: flex;

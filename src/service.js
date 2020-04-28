@@ -1,12 +1,13 @@
 const domParser = new DOMParser();
 
 export const getContent = async moment => {
-  const pageId = moment.locale("fr").format("MMMM_YYYY");
+  const localeMoment = moment.clone().locale("fr");
+  const pageId = localeMoment.format("MMMM_YYYY");
   const response = await fetch(
     `https://fr.wikipedia.org/api/rest_v1/page/html/${pageId}`
   );
   const rawData = await response.text();
-  const dateSection = moment.local("fr").format("D MMMM");
+  const dateSection = localeMoment.format("D MMMM");
   const document = domParser.parseFromString(rawData, "text/html");
   const allSectionTitle = document.querySelectorAll("h3");
   const events = [];

@@ -28,8 +28,12 @@ export default {
   },
   methods: {
     handleChange($event) {
-      if (/^\d\d\d\d-\d\d-\d\d \d\d:\d\d$/.test($event.target.value)) {
-        this.$emit("update:date", moment($event.target.value));
+      const asTime = moment($event.target.value);
+      if (
+        /^\d\d\d\d-\d\d-\d\d \d\d:\d\d$/.test($event.target.value) &&
+        asTime.isValid()
+      ) {
+        this.$emit("update:date", asTime);
       }
     },
     handleSubmit($event) {

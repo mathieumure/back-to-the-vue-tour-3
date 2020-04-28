@@ -31,5 +31,6 @@ body {
   font-family: Roboto, Open Sans, sans-serif;
   background-color: black;
   color: white;
+  margin: 0;
 }
 </style>

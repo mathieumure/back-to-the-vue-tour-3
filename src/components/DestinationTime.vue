@@ -72,7 +72,7 @@ export default {
       return this.destinationTime.year();
     },
     day() {
-      return this.destinationTime.days();
+      return this.destinationTime.date();
     },
     month() {
       return this.destinationTime.format("MMM");
@@ -105,7 +105,6 @@ export default {
   background-color: gray;
   padding: 5px 50px 0 50px;
   height: 230px;
-  width: 100%;
 }
 .destination-time__digits-groups {
   display: flex;

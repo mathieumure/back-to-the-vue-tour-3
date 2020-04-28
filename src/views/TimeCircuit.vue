@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <h1>Time Circuit</h1>
-    <div class="digit-container">
-      <DestinationTime @destinationTimeSet="handleDestinationTimeSet" />
+  <div class="time-circuit">
+    <div class="time-circuit__wrapper">
+      <DestinationTime @destinationTimeSet="travel" />
       <PresentTime />
       <LastDepartedTime />
     </div>
-    <button type="button" @click="travels">travel</button>
   </div>
 </template>
 
@@ -14,25 +12,29 @@
 import DestinationTime from "../components/DestinationTime";
 import PresentTime from "../components/PresentTime";
 import LastDepartedTime from "../components/LastDepartedTime";
-// TODO: handle vuex
+
 export default {
   name: "TimeCircuit",
   components: { LastDepartedTime, PresentTime, DestinationTime },
   methods: {
-    travels() {
+    travel(time) {
       this.$router.push({ name: "time-travel" });
-    },
-    handleDestinationTimeSet(time) {
-      console.log(time);
+      this.$store.dispatch("timeTravel", time);
     }
   }
 };
 </script>
 
 <style scoped="true">
-.digit-container {
+.time-circuit {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.time-circuit__wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 }
 </style>

@@ -63,16 +63,27 @@ export default {
   }),
   mounted() {
     this.syncMinutes();
+    if (this.currentTime) {
+      this.presentTime = this.currentTime;
+    }
   },
   destroyed() {
     clearTimeout(this.currentTimeout);
   },
+  watch: {
+    currentTime() {
+      this.presentTime = moment(this.currentTime);
+    }
+  },
   computed: {
+    currentTime() {
+      return this.$store.getters.CURRENT_TIME;
+    },
     year() {
       return this.presentTime.year();
     },
     day() {
-      return this.presentTime.days();
+      return this.presentTime.date();
     },
     month() {
       return this.presentTime.format("MMM");
@@ -105,7 +116,6 @@ export default {
   background-color: gray;
   padding: 5px 50px 0 50px;
   height: 230px;
-  width: 100%;
 }
 .present-time__digits-groups {
   display: flex;

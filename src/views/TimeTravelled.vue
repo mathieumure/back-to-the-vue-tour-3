@@ -8,16 +8,16 @@
         </p>
       </li>
     </ul>
+    <button @click="goBackToTheDeLorean">Go back to the DeLorean</button>
   </div>
 </template>
 
 <script>
 import { getContent } from "../service";
-import moment from "moment";
-// TODO: base on Vuex logic
+
 export default {
   name: "TimeTravelled",
-  data: () => ({ facts: [], date: "1994-06-02" }),
+  data: () => ({ facts: [] }),
   async mounted() {
     this.facts = await getContent(this.moment);
   },
@@ -28,10 +28,15 @@ export default {
         .filter(it => it.length > 0);
     },
     moment() {
-      return moment(this.date);
+      return this.$store.getters.CURRENT_TIME;
     },
     currentDate() {
       return this.moment.format("DD MMMM YYYY");
+    }
+  },
+  methods: {
+    goBackToTheDeLorean() {
+      this.$router.push({ name: "time-circuit" });
     }
   }
 };
