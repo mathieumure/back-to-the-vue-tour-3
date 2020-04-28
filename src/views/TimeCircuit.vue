@@ -2,7 +2,7 @@
   <div>
     <h1>Time Circuit</h1>
     <div class="digit-container">
-      <DestinationTime />
+      <DestinationTime @destinationTimeSet="handleDestinationTimeSet" />
     </div>
     <button type="button" @click="travels">travel</button>
   </div>
@@ -20,6 +20,9 @@ export default {
   methods: {
     travels() {
       this.$router.push({ name: "time-travel" });
+    },
+    handleDestinationTimeSet(time) {
+      console.log(time);
     }
   }
 };

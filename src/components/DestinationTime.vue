@@ -58,7 +58,6 @@ import NumberDigit from "./NumberDigit";
 import moment from "moment";
 import WordDigit from "./WordDigit";
 import DestinationTimeModalForm from "./DestinationTimeModalForm";
-// TODO : watch and emit datetime and add modal form
 
 export default {
   name: "destination-time",
@@ -90,6 +89,7 @@ export default {
     },
     closeModal() {
       this.isModalDisplayed = false;
+      this.$emit("destinationTimeSet", this.destinationTime);
     }
   }
 };
