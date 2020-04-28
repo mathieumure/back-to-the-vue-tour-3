@@ -4,6 +4,7 @@
             v-for="(digit, index) in digits"
             class="single-digit"
             :key="index"
+            :color="color"
             :value="digit"
         />
     </div>
@@ -19,7 +20,11 @@
       number: {
         type: Number,
         required: true
-      }
+      },
+        color: {
+            type: String,
+            required: true
+        }
     },
     computed: {
       digits() {

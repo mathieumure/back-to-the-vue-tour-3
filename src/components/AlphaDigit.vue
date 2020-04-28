@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" :style="{'--digit-active-color': color, '--digit-inactive-color': inactiveColor}">
     <div class="line">
       <div class="tick horizontal" :class="{'active': isTopLeftActive}"></div>
       <div class="tick horizontal" :class="{'active': isTopRightActive}"></div>
@@ -29,15 +29,23 @@
   </div>
 </template>
 <script>
+    import Color from 'color'
 export default {
     name: 'AlphaDigit',
     props: {
         value: {
             type: String,
             required: true,
+        },
+        color: {
+            type: String,
+            required: true
         }
     },
     computed: {
+        inactiveColor () {
+            return Color(this.color).darken(0.7)
+        },
         isTopLeftActive() {
             return ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'M', 'O', 'P', 'Q', 'R', 'S', 'T', 'Z'].includes(this.value.toUpperCase())
         },
@@ -104,11 +112,11 @@ export default {
 
   .tick {
     border-radius: 10%;
-    background-color: #421a00;
+    background-color: var(--digit-inactive-color);
     margin-right: 2px;
   }
   .tick.active {
-    background-color: #fa6a01;
+    background-color: var(--digit-active-color);
   }
   .tick.horizontal {
     height: 5px;

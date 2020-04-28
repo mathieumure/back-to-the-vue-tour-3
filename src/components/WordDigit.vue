@@ -3,6 +3,7 @@
         <AlphaDigit
             v-for="(digit, index) in digits"
             class="single-ampha"
+            :color="color"
             :key="index"
             :value="digit"
         />
@@ -19,7 +20,11 @@
       word: {
         type: String,
         required: true
-      }
+      },
+        color: {
+            type: String,
+            required: true
+        }
     },
     computed: {
       digits() {

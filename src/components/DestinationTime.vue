@@ -7,7 +7,7 @@
                     YEAR
                 </div>
                 <div class="digits-group__value">
-                    <NumberDigit :number="year"/>
+                    <NumberDigit :number="year" color="#fa6a01"/>
                 </div>
             </div>
             <div class="destination-time__digits-group">
@@ -15,7 +15,7 @@
                     MONTH
                 </div>
                 <div class="digits-group__value">
-                    <WordDigit :word="month"/>
+                    <WordDigit :word="month" color="#fa6a01"/>
                 </div>
             </div>
             <div class="destination-time__digits-group">
@@ -23,7 +23,7 @@
                     DAY
                 </div>
                 <div class="digits-group__value">
-                    <NumberDigit :number="day"/>
+                    <NumberDigit :number="day" color="#fa6a01"/>
                 </div>
             </div>
             <div class="destination-time__digits-group">
@@ -31,7 +31,7 @@
                     HOUR
                 </div>
                 <div class="digits-group__value">
-                    <NumberDigit :number="hour"/>
+                    <NumberDigit :number="hour" color="#fa6a01"/>
                 </div>
             </div>
             <div class="destination-time__digits-group">
@@ -39,7 +39,7 @@
                     MIN
                 </div>
                 <div class="digits-group__value">
-                    <NumberDigit :number="minutes"/>
+                    <NumberDigit :number="minutes" color="#fa6a01"/>
                 </div>
             </div>
         </div>
