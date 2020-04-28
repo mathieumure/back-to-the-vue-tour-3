@@ -1,12 +1,7 @@
 <template>
-  <div class="destination-time">
-    <DestinationTimeModalForm
-      :date.sync="destinationTime"
-      v-if="isModalDisplayed"
-      @submit="closeModal"
-    />
-    <div class="destination-time__digits-groups">
-      <div class="destination-time__digits-group">
+  <div class="present-time">
+    <div class="present-time__digits-groups">
+      <div class="present-time__digits-group">
         <div class="digits-group__title">
           YEAR
         </div>
@@ -14,7 +9,7 @@
           <NumberDigit :number="year" :color="digitColor" />
         </div>
       </div>
-      <div class="destination-time__digits-group">
+      <div class="present-time__digits-group">
         <div class="digits-group__title">
           MONTH
         </div>
@@ -22,7 +17,7 @@
           <WordDigit :word="month" :color="digitColor" />
         </div>
       </div>
-      <div class="destination-time__digits-group">
+      <div class="present-time__digits-group">
         <div class="digits-group__title">
           DAY
         </div>
@@ -30,7 +25,7 @@
           <NumberDigit :number="day" :color="digitColor" />
         </div>
       </div>
-      <div class="destination-time__digits-group">
+      <div class="present-time__digits-group">
         <div class="digits-group__title">
           HOUR
         </div>
@@ -38,7 +33,7 @@
           <NumberDigit :number="hour" :color="digitColor" />
         </div>
       </div>
-      <div class="destination-time__digits-group">
+      <div class="present-time__digits-group">
         <div class="digits-group__title">
           MIN
         </div>
@@ -47,57 +42,62 @@
         </div>
       </div>
     </div>
-    <button type="button" class="destination-time__title" @click="openModal">
-      DESTINATION TIME
+    <button type="button" class="present-time__title">
+      PRESENT TIME
     </button>
   </div>
 </template>
 
 <script>
-import NumberDigit from "./NumberDigit";
 import moment from "moment";
+import NumberDigit from "./NumberDigit";
 import WordDigit from "./WordDigit";
-import DestinationTimeModalForm from "./DestinationTimeModalForm";
 
 export default {
-  name: "destination-time",
-  components: { DestinationTimeModalForm, WordDigit, NumberDigit },
+  name: "present-time",
+  components: { WordDigit, NumberDigit },
   data: () => ({
-    digitColor: "#fa6a01",
-    destinationTime: moment(),
-    isModalDisplayed: false
+    digitColor: "#6df518",
+    presentTime: moment(),
+    currentTimeout: null
   }),
+  mounted() {
+    this.syncMinutes();
+  },
+  destroyed() {
+    clearTimeout(this.currentTimeout);
+  },
   computed: {
     year() {
-      return this.destinationTime.year();
+      return this.presentTime.year();
     },
     day() {
-      return this.destinationTime.days();
+      return this.presentTime.days();
     },
     month() {
-      return this.destinationTime.format("MMM");
+      return this.presentTime.format("MMM");
     },
     hour() {
-      return this.destinationTime.hour();
+      return this.presentTime.hour();
     },
     minutes() {
-      return this.destinationTime.minutes();
+      return this.presentTime.minutes();
     }
   },
   methods: {
-    openModal() {
-      this.isModalDisplayed = true;
-    },
-    closeModal() {
-      this.isModalDisplayed = false;
-      this.$emit("destinationTimeSet", this.destinationTime);
+    syncMinutes() {
+      this.currentTimeout = setTimeout(() => {
+        // TODO Avoid this reset, Vue.set ? proxy ?
+        this.presentTime = moment(this.presentTime.add(1, "minutes"));
+        this.syncMinutes();
+      }, 60000);
     }
   }
 };
 </script>
 
 <style scoped>
-.destination-time {
+.present-time {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -107,12 +107,12 @@ export default {
   height: 230px;
   width: 100%;
 }
-.destination-time__digits-groups {
+.present-time__digits-groups {
   display: flex;
   align-items: center;
 }
 
-.destination-time__digits-group {
+.present-time__digits-group {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -133,7 +133,7 @@ export default {
   border-radius: 4px;
 }
 
-.destination-time__title {
+.present-time__title {
   font-size: 15pt;
   text-transform: uppercase;
   background-color: black;
@@ -142,7 +142,7 @@ export default {
   color: white;
   border: none;
 }
-.destination-time__title:hover {
+.present-time__title:hover {
   cursor: pointer;
 }
 </style>

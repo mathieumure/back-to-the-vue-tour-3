@@ -92,7 +92,7 @@ export default {
   },
   computed: {
     inactiveColor() {
-      return Color(this.color).darken(0.7);
+      return Color(this.color).darken(0.8);
     },
     isTopLeftActive() {
       return [

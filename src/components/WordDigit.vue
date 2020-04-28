@@ -2,7 +2,6 @@
   <div class="word-digit">
     <AlphaDigit
       v-for="(digit, index) in digits"
-      class="single-ampha"
       :color="color"
       :key="index"
       :value="digit"
