@@ -1,40 +1,44 @@
 <template>
   <div class="time-travelled">
-    <h1>Welcome to the {{currentDate}}</h1>
+    <h1>Welcome to the {{ currentDate }}</h1>
     <ul>
       <li v-for="(fact, factId) in parsedFacts" :key="factId">
-        <p v-for="(paragraph, paragraphId) in fact" :key="paragraphId">{{paragraph}}</p>
+        <p v-for="(paragraph, paragraphId) in fact" :key="paragraphId">
+          {{ paragraph }}
+        </p>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import {getContent} from "../service";
-import moment from 'moment';
+import { getContent } from "../service";
+import moment from "moment";
 // TODO: base on Vuex logic
 export default {
   name: "TimeTravelled",
-  data: () => ({facts: [], date: '1994-06-02'}),
+  data: () => ({ facts: [], date: "1994-06-02" }),
   async mounted() {
     this.facts = await getContent(this.moment);
   },
   computed: {
-    parsedFacts () {
-      return this.facts.map(it => it.split("\n").filter(Boolean)).filter(it => it.length > 0)
+    parsedFacts() {
+      return this.facts
+        .map(it => it.split("\n").filter(Boolean))
+        .filter(it => it.length > 0);
     },
-    moment () {
-      return moment(this.date)
+    moment() {
+      return moment(this.date);
     },
-    currentDate () {
-      return this.moment.format('DD MMMM YYYY')
+    currentDate() {
+      return this.moment.format("DD MMMM YYYY");
     }
   }
-}
+};
 </script>
 
 <style scoped>
-  .time-travelled {
-    margin: 40px;
-  }
+.time-travelled {
+  margin: 40px;
+}
 </style>

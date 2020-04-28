@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view/>
+    <router-view />
     <RoutingModal />
   </div>
 </template>
@@ -9,11 +9,11 @@
 import RoutingModal from "./components/RoutingModal";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     RoutingModal
-  },
-}
+  }
+};
 </script>
 
 <style>
