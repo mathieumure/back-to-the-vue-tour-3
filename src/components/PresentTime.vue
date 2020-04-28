@@ -50,8 +50,8 @@
 
 <script>
 import moment from "moment";
-import NumberDigit from "./NumberDigit";
-import WordDigit from "./WordDigit";
+import NumberDigit from "./digits/NumberDigit";
+import WordDigit from "./digits/WordDigit";
 
 export default {
   name: "present-time",

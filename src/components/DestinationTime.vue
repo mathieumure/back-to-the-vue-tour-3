@@ -54,9 +54,9 @@
 </template>
 
 <script>
-import NumberDigit from "./NumberDigit";
+import NumberDigit from "./digits/NumberDigit";
 import moment from "moment";
-import WordDigit from "./WordDigit";
+import WordDigit from "./digits/WordDigit";
 import DestinationTimeModalForm from "./DestinationTimeModalForm";
 
 export default {
