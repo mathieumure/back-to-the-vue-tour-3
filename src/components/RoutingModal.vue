@@ -22,6 +22,9 @@ export default {
   }),
   watch: {
     $route(to, from) {
+      if (to.path === "/") {
+        return;
+      }
       if (to.name !== from.name) {
         this.routeChanged = true;
         this.doneAnimating = false;
