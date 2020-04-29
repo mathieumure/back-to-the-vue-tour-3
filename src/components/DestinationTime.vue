@@ -1,7 +1,7 @@
 <template>
   <div class="destination-time">
     <DestinationTimeModalForm
-      :date.sync="destinationTime"
+      v-model:date="destinationTime"
       v-if="isModalDisplayed"
       @submit="closeModal"
     />
