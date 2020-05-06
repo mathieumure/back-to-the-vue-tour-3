@@ -52,57 +52,73 @@
 import moment from "moment";
 import NumberDigit from "./digits/NumberDigit";
 import WordDigit from "./digits/WordDigit";
+import { ref, watch, reactive, computed, onMounted, onUnmounted } from "vue";
+import store from "../store";
 
 export default {
   name: "present-time",
   components: { WordDigit, NumberDigit },
-  data: () => ({
-    digitColor: "#6df518",
-    presentTime: moment(),
-    currentTimeout: null
-  }),
-  mounted() {
-    this.syncMinutes();
-    if (this.currentTime) {
-      this.presentTime = this.currentTime;
-    }
-  },
-  destroyed() {
-    clearTimeout(this.currentTimeout);
-  },
-  watch: {
-    currentTime() {
-      this.presentTime = moment(this.currentTime);
-    }
-  },
-  computed: {
-    currentTime() {
-      return this.$store.getters.CURRENT_TIME;
-    },
-    year() {
-      return this.presentTime.year();
-    },
-    day() {
-      return this.presentTime.date();
-    },
-    month() {
-      return this.presentTime.format("MMM");
-    },
-    hour() {
-      return this.presentTime.hour();
-    },
-    minutes() {
-      return this.presentTime.minutes();
-    }
-  },
-  methods: {
-    syncMinutes() {
-      this.currentTimeout = setTimeout(() => {
+  setup() {
+    let timeToDisplay = reactive(moment());
+    const digitColor = ref("#6df518");
+    let timeout = reactive({});
+
+    // Proxy of object, .value not needed
+    console.log(timeToDisplay);
+
+    console.log(digitColor);
+
+    const currentTime = computed(() => store.getters.CURRENT_TIME);
+
+    const year = computed(() => {
+      return timeToDisplay.year();
+    });
+    const day = computed(() => {
+      return timeToDisplay.date();
+    });
+    const month = computed(() => {
+      return timeToDisplay.format("MMM");
+    });
+    const hour = computed(() => {
+      return timeToDisplay.hour();
+    });
+    const minutes = computed(() => {
+      return timeToDisplay.minutes();
+    });
+
+    onMounted(() => {
+      syncMinutes();
+      if (currentTime) {
+        timeToDisplay = currentTime.value;
+      }
+    });
+    onUnmounted(() => {
+      clearTimeout(timeout);
+    });
+
+    watch(
+      () => currentTime.value,
+      () => {
+        timeToDisplay = moment(currentTime.value);
+      }
+    );
+    const syncMinutes = () => {
+      timeout = setTimeout(() => {
+        console.log("timeout works", timeToDisplay);
         // TODO Avoid this reset, Vue.set ? proxy ?
-        this.presentTime = moment(this.presentTime.add(1, "minutes"));
-        this.syncMinutes();
-      }, 60000);
-    }
+        timeToDisplay.add(1, "minutes");
+        syncMinutes();
+      }, 1000);
+    };
+
+    return {
+      digitColor,
+      year,
+      day,
+      month,
+      hour,
+      minutes
+    };
   }
 };
 </script>
