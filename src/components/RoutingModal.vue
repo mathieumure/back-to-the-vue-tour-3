@@ -14,29 +14,41 @@
 </template>
 
 <script>
+import router from "../router";
+import { ref, watch, reactive, toRef } from "vue";
+
 export default {
-  name: "Loader",
-  data: () => ({
-    routeChanged: false,
-    doneAnimating: false
-  }),
-  watch: {
-    $route(to, from) {
+  setup() {
+    let state = reactive({
+      routeChanged: false,
+      doneAnimating: false
+    });
+
+    let count = ref(0);
+
+    watch(router.currentRoute, (to, from) => {
       if (to.path === "/") {
         return;
       }
       if (to.name !== from.name) {
-        this.routeChanged = true;
-        this.doneAnimating = false;
+        state.routeChanged = true;
+        state.doneAnimating = false;
         setTimeout(() => {
-          this.doneAnimating = true;
+          state.doneAnimating = true;
         }, 3000);
         setTimeout(() => {
-          this.routeChanged = false;
+          state.routeChanged = false;
         }, 3300);
       }
-    }
-  }
+    });
+
+    return {
+      doneAnimating: toRef(state, "doneAnimating"),
+      routeChanged: toRef(state, "routeChanged"),
+      count
+    };
+  },
+  name: "Loader"
 };
 </script>
 

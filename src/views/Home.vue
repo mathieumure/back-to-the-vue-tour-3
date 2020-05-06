@@ -2,32 +2,36 @@
   <main class="main" @click="goToNextPage">
     <h1 class="title">Back</h1>
     <h2 class="subtitle">&vue tour</h2>
-    <h3 class="version">{{ parseVue(vueVersion) }}</h3>
+    <h3 class="version">{{ parsedVue }}</h3>
   </main>
 </template>
 
 <script>
 import pakageData from "../../package.json";
-
+import { ref, computed } from "vue";
+import router from "../router";
 export default {
-  name: "Home",
-  data: () => ({
-    vueVersion: pakageData.dependencies.vue
-  }),
-  methods: {
-    parseVue() {
-      if (/^\^?2\./.exec(this.vueVersion)) {
+  setup() {
+    const vueVersion = ref(pakageData.dependencies.vue);
+
+    const parsedVue = computed(() => {
+      if (/^\^?2\./.exec(vueVersion.value)) {
         return "II";
       }
-      if (/^\^?3\./.exec(this.vueVersion)) {
+      if (/^\^?3\./.exec(vueVersion.value)) {
         return "III";
       }
       return "";
-    },
-    goToNextPage() {
-      this.$router.push({ name: "time-circuit" });
-    }
-  }
+    });
+
+    const goToNextPage = () => router.push({ name: "time-circuit" });
+
+    return {
+      goToNextPage,
+      parsedVue
+    };
+  },
+  name: "Home"
 };
 </script>
 
