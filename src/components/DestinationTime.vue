@@ -1,7 +1,7 @@
 <template>
   <div class="destination-time">
     <DestinationTimeModalForm
-      :date.sync="destinationTime"
+      v-model:date="destinationTime"
       v-if="isModalDisplayed"
       @submit="closeModal"
     />
@@ -58,40 +58,56 @@ import NumberDigit from "./digits/NumberDigit";
 import moment from "moment";
 import WordDigit from "./digits/WordDigit";
 import DestinationTimeModalForm from "./DestinationTimeModalForm";
+import { reactive, computed, toRefs } from "vue";
 
 export default {
   name: "destination-time",
   components: { DestinationTimeModalForm, WordDigit, NumberDigit },
-  data: () => ({
-    digitColor: "#fa6a01",
-    destinationTime: moment(),
-    isModalDisplayed: false
-  }),
-  computed: {
-    year() {
-      return this.destinationTime.year();
-    },
-    day() {
-      return this.destinationTime.date();
-    },
-    month() {
-      return this.destinationTime.format("MMM");
-    },
-    hour() {
-      return this.destinationTime.hour();
-    },
-    minutes() {
-      return this.destinationTime.minutes();
-    }
-  },
-  methods: {
-    openModal() {
-      this.isModalDisplayed = true;
-    },
-    closeModal() {
-      this.isModalDisplayed = false;
-      this.$emit("destinationTimeSet", this.destinationTime);
-    }
+  setup(_, context) {
+    const data = reactive({
+      digitColor: "#fa6a01",
+      destinationTime: moment(),
+      isModalDisplayed: false
+    });
+
+    const year = computed(() => {
+      return data.destinationTime.year();
+    });
+
+    const day = computed(() => {
+      return data.destinationTime.date();
+    });
+    const month = computed(() => {
+      return data.destinationTime.format("MMM");
+    });
+    const hour = computed(() => {
+      return data.destinationTime.hour();
+    });
+    const minutes = computed(() => {
+      return data.destinationTime.minutes();
+    });
+
+    const openModal = () => {
+      console.log("Im here", data.destinationTime);
+      data.isModalDisplayed = true;
+    };
+
+    const closeModal = () => {
+      data.isModalDisplayed = false;
+      // eslint-disable-next-line vue/custom-event-name-casing
+      context.emit("destinationTimeSet", data.destinationTime);
+    };
+
+    return {
+      year,
+      day,
+      month,
+      hour,
+      minutes,
+      openModal,
+      closeModal,
+      ...toRefs(data),
+    };
   }
 };
 </script>

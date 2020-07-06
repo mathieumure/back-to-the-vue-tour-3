@@ -8,25 +8,30 @@
 
 <script>
 import pakageData from "../../package.json";
+import {reactive} from 'vue';
+import router from '../router'
 
 export default {
   name: "Home",
-  data: () => ({
-    vueVersion: pakageData.dependencies.vue
-  }),
-  methods: {
-    parseVue() {
-      if (/^\^?2\./.exec(this.vueVersion)) {
+  setup() {
+    const data = reactive({
+      vueVersion: pakageData.dependencies.vue
+    })
+
+    const parseVue = () => {
+      if (/^\^?2\./.exec(data.vueVersion)) {
         return "II";
       }
-      if (/^\^?3\./.exec(this.vueVersion)) {
+      if (/^\^?3\./.exec(data.vueVersion)) {
         return "III";
       }
       return "";
-    },
-    goToNextPage() {
-      this.$router.push({ name: "time-circuit" });
     }
+    const goToNextPage = () => {
+      router.push({ name: "time-circuit" });
+    }
+
+    return {goToNextPage, parseVue, vueVersion: data.vueVersion}
   }
 };
 </script>
