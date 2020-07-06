@@ -77,9 +77,13 @@
   </div>
 </template>
 <script>
-import Color from "color";
+import { useColors } from "./useColors";
 export default {
   name: "AlphaDigit",
+  setup(props) {
+    const inactiveColor = useColors(props.color);
+    return { inactiveColor };
+  },
   props: {
     value: {
       type: String,
@@ -91,9 +95,6 @@ export default {
     }
   },
   computed: {
-    inactiveColor() {
-      return Color(this.color).darken(0.8);
-    },
     isTopLeftActive() {
       return [
         "A",

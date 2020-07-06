@@ -26,10 +26,14 @@
   </div>
 </template>
 <script>
-import Color from "color";
+import { useColors } from "./useColors";
 
 export default {
   name: "Digit",
+  setup(props) {
+    const inactiveColor = useColors(props.color);
+    return { inactiveColor };
+  },
   props: {
     value: {
       type: Number,
@@ -41,9 +45,6 @@ export default {
     }
   },
   computed: {
-    inactiveColor() {
-      return Color(this.color).darken(0.8);
-    },
     isTopActive() {
       return [0, 2, 3, 5, 6, 7, 8, 9].includes(this.value);
     },
