@@ -58,7 +58,7 @@ import NumberDigit from "./digits/NumberDigit";
 import moment from "moment";
 import WordDigit from "./digits/WordDigit";
 import DestinationTimeModalForm from "./DestinationTimeModalForm";
-import { reactive, computed, toRefs } from "vue";
+import { reactive, computed, toRefs, ref } from "vue";
 
 export default {
   name: "destination-time",
@@ -69,6 +69,10 @@ export default {
       destinationTime: moment(),
       isModalDisplayed: false
     });
+
+    const digitColorElement = ref('#fa6a01');
+    console.log(digitColorElement); // wrapper
+    console.log(digitColorElement.value); // #fa6a01
 
     const year = computed(() => {
       return data.destinationTime.year();
@@ -106,7 +110,8 @@ export default {
       minutes,
       openModal,
       closeModal,
-      ...toRefs(data),
+      digitColorElement,
+      ...toRefs(data)
     };
   }
 };
