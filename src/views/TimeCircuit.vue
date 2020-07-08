@@ -1,7 +1,7 @@
 <template>
   <div class="time-circuit">
     <div class="time-circuit__wrapper">
-      <DestinationTime @destinationTimeSet="travel" />
+      <DestinationTime @destination-time-set="travel" />
       <PresentTime />
       <LastDepartedTime />
     </div>

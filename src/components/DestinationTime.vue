@@ -90,7 +90,7 @@ export default {
     },
     closeModal() {
       this.isModalDisplayed = false;
-      this.$emit("destinationTimeSet", this.destinationTime);
+      this.$emit("destination-time-set", this.destinationTime);
     }
   }
 };
